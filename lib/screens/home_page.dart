@@ -1,6 +1,7 @@
 
 
 import 'package:ecommerce_app_clone/app_utility/ui_helper.dart';
+import 'package:ecommerce_app_clone/screens/cart_page.dart';
 import 'package:ecommerce_app_clone/widget/app_constant.dart';
 import 'package:flutter/material.dart';
 
@@ -346,7 +347,7 @@ class HomePage extends StatelessWidget{
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: IconButton(
-                icon: Icon(Icons.add_card),
+                icon: Icon(Icons.home_outlined,color: Colors.grey,),
                 color: Colors.black26,
                 onPressed: (){}, //required
                 iconSize: 40,
@@ -361,7 +362,9 @@ class HomePage extends StatelessWidget{
             IconButton(
               icon: Icon(Icons.shopping_cart_outlined),
               color: Colors.black26,
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
+              },
               iconSize: 40,
             ),
             IconButton(

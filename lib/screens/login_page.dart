@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_clone/screens/home_page.dart';
 import 'package:ecommerce_app_clone/screens/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +73,9 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
                 height: 45,
-                child: ElevatedButton(onPressed: (){}, child: Row(
+                child: ElevatedButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                }, child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Log In',style: mTextStyle25(mColor: Colors.white,mFontWeight: FontWeight.bold),),

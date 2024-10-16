@@ -6,7 +6,7 @@ class ExploreProduct extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
           Container(
             width: double.infinity,
@@ -69,17 +69,7 @@ class ExploreProduct extends StatelessWidget{
               ),
             ),
           ),
-          Positioned(
-            top: 420,
-            child: Container(
-              height: 450,
-              width: 410,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight:Radius.circular(50),)
-            ),
-            ),
-          )
+
         ],
       )
     );

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class UiHelper {
   static final primaryColor = Color(0xffFF660E);
-  static final secondaryColor = Color(0xff999999);
+  static final secondaryColor = Color(0xffF5F5F5);
   static final tertiaryColor = Color(0xff3A3B39);
   static final quaternaryColor = Color(0xffFFFFFF);
 
