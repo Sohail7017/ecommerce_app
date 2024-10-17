@@ -1,9 +1,10 @@
+import 'package:ecommerce_app_clone/screens/dashboard.dart';
 import 'package:ecommerce_app_clone/screens/home_page.dart';
 import 'package:ecommerce_app_clone/screens/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
-import '../app_utility/custom_text_field.dart';
-import '../app_utility/ui_helper.dart';
+import '../app_utils/custom_text_field.dart';
+import '../app_utils/ui_helper.dart';
 
 class LoginPage extends StatefulWidget{
   @override
@@ -74,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
               child: SizedBox(
                 height: 45,
                 child: ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
                 }, child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

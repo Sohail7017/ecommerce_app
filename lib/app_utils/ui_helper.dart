@@ -6,7 +6,8 @@ class UiHelper {
   static final primaryColor = Color(0xffFF660E);
   static final secondaryColor = Color(0xffF5F5F5);
   static final tertiaryColor = Color(0xff3A3B39);
-  static final quaternaryColor = Color(0xffFFFFFF);
+
+  static final quaternaryColor = Color(0xff999999);
 
 
 }
@@ -60,6 +61,18 @@ TextStyle mTextStyle18({
       fontFamily: 'mainFont'
   );
 }
+TextStyle mTextStyle22({
+  Color mColor = Colors.black,
+  mFontWeight = FontWeight.normal,
+}){
+  return TextStyle(
+      color: mColor,
+      fontSize: 22,
+      fontWeight: mFontWeight,
+      fontFamily: 'mainFont'
+  );
+}
+
 
 TextStyle mTextStyle25({
   Color mColor = Colors.black,

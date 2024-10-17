@@ -3,7 +3,7 @@ import 'package:ecommerce_app_clone/screens/explore_product.dart';
 import 'package:ecommerce_app_clone/screens/home_page.dart';
 import 'package:ecommerce_app_clone/screens/login_page.dart';
 import 'package:ecommerce_app_clone/screens/sign_up_page.dart';
-import 'package:ecommerce_app_clone/splash_screen.dart';
+import 'package:ecommerce_app_clone/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

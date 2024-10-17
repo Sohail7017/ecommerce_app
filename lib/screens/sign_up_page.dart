@@ -1,5 +1,6 @@
-import 'package:ecommerce_app_clone/app_utility/custom_text_field.dart';
-import 'package:ecommerce_app_clone/app_utility/ui_helper.dart';
+import 'package:ecommerce_app_clone/app_utils/custom_text_field.dart';
+import 'package:ecommerce_app_clone/app_utils/ui_helper.dart';
+import 'package:ecommerce_app_clone/screens/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget{
@@ -70,7 +71,11 @@ class SignUpPage extends StatelessWidget{
             SizedBox(
               height: 20,
             ),
-            InkWell(child: Text('Already have a account',style: mTextStyle16(mFontWeight: FontWeight.w600),))
+            InkWell(
+                onTap: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                },
+                child: Text('Already have a account',style: mTextStyle16(mFontWeight: FontWeight.w600),))
           ],
         ),
       ),

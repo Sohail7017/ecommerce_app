@@ -1,4 +1,4 @@
-import 'package:ecommerce_app_clone/app_utility/ui_helper.dart';
+import 'package:ecommerce_app_clone/app_utils/ui_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
