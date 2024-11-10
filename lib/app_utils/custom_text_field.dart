@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextField{
 
+
   static mTextField({
    required TextEditingController mController,
     required String mText,
@@ -11,10 +12,14 @@ class CustomTextField{
    String? sufText,
     IconData? suffixIcon,
      IconData? prefIcon,
+    BuildContext? context,
+
 
   }
 
   ){
+    bool isLight = context != null && Theme.of(context).brightness == Brightness.light;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
       child: TextField(
@@ -30,11 +35,11 @@ class CustomTextField{
           suffixIcon: Icon(suffixIcon),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(11),
-            borderSide: BorderSide(color: Colors.black),
+            borderSide: BorderSide(color: isLight?Colors.black:Colors.white),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(11),
-            borderSide: BorderSide(color: Colors.black),
+            borderSide: BorderSide(color: isLight?Colors.black:Colors.white),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(11),

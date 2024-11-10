@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../provider/change_theme_provider.dart';
+
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
 
@@ -15,6 +17,7 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  bool isLight = false;
   @override
   void initState() {
     context.read<UserBloc>().add(GetUserEvent());
@@ -22,11 +25,13 @@ class _UserPageState extends State<UserPage> {
   }
   @override
   Widget build(BuildContext context) {
+    isLight = Theme.of(context).brightness==Brightness.light;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: UiHelper.secondaryColor,
+
+        backgroundColor: isLight?UiHelper.secondaryColor:Colors.black,
         centerTitle: true,
-        title: Text('User',style: mTextStyle28(mFontWeight: FontWeight.bold),),
+        title: Text('User',style: mTextStyle28(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white),),
       ),
       body: BlocBuilder<UserBloc,UserState>(
           builder: (_,state){
@@ -57,7 +62,11 @@ class _UserPageState extends State<UserPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      Center(child: Text(state.userDataModel.data!.name!,style: mTextStyle18(mFontWeight: FontWeight.bold),)),
+                      Center(child: Text(state.userDataModel.data!.name!,
+                        style: mTextStyle18(
+                            mFontWeight: FontWeight.bold,
+                          mColor: isLight?Colors.black:Colors.white
+                        ),)),
                     SizedBox(height: 20,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -65,7 +74,7 @@ class _UserPageState extends State<UserPage> {
                       width: double.infinity,
                       height: 120,
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
+                        color: isLight?Colors.blue.shade50:Colors.white10,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Column(
@@ -73,8 +82,8 @@ class _UserPageState extends State<UserPage> {
                         children: [
                           ListTile(
                             leading: Icon(Icons.mail,color: Colors.red,),
-                            title: Text('Mail',style: mTextStyle16(),),
-                            trailing: Text(state.userDataModel.data!.email!,style: mTextStyle16(),),
+                            title: Text('Mail',style: mTextStyle16(mColor: isLight?Colors.black:Colors.white),),
+                            trailing: Text(state.userDataModel.data!.email!,style: mTextStyle16(mColor: isLight?Colors.black:Colors.white),),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -85,9 +94,9 @@ class _UserPageState extends State<UserPage> {
                             ),
                           ),
                           ListTile(
-                            leading: Icon(Icons.mobile_friendly),
-                            title: Text('MobileNo',style: mTextStyle16(),),
-                            trailing: Text("+91${state.userDataModel.data!.mobileNumber!}",style: mTextStyle16(),),
+                            leading: Icon(Icons.mobile_friendly,color: Colors.green,),
+                            title: Text('MobileNo',style: mTextStyle16(mColor: isLight?Colors.black:Colors.white),),
+                            trailing: Text("+91${state.userDataModel.data!.mobileNumber!}",style: mTextStyle16(mColor: isLight?Colors.black:Colors.white),),
                           ),
 
 
@@ -97,7 +106,20 @@ class _UserPageState extends State<UserPage> {
                     ),
                   ),
 
-
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: ListTile(
+                      leading: Icon(Icons.light_mode),
+                      title: Text('Theme',style: mTextStyle16(mFontWeight: FontWeight.w500,mColor: isLight?Colors.black:Colors.white),),
+                      trailing: Switch.adaptive(
+                          inactiveTrackColor: Colors.white,
+                          activeColor: Colors.green.shade500,
+                          value: context.watch<ChangeThemeProvider>().getTheme(),
+                          onChanged: (value){
+                            context.read<ChangeThemeProvider>().updateTheme(value);
+                          }),
+                    ),
+                  ),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -113,10 +135,11 @@ class _UserPageState extends State<UserPage> {
                       child: ListTile(
 
                         leading: Icon(Icons.logout),
-                        title: Text('logOut',style: mTextStyle16(mFontWeight: FontWeight.w500),),
+                        title: Text('logOut',style: mTextStyle16(mFontWeight: FontWeight.w500,mColor: isLight?Colors.black:Colors.white),),
                       ),
                     ),
-                  )
+                  ),
+
 
 
                 ],);

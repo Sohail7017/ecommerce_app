@@ -15,6 +15,7 @@ class _CartPageState extends State<CartPage> {
   var countController = TextEditingController();
 
   int qty = 1;
+  bool isLight = false;
 
   @override
   void initState() {
@@ -25,12 +26,14 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    isLight = Theme.of(context).brightness==Brightness.light;
+
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: UiHelper.secondaryColor,
+          backgroundColor: isLight?UiHelper.secondaryColor:Colors.black,
           centerTitle: true,
           elevation: 2,
-          title: Text('My Cart',style: mTextStyle28(),),
+          title: Text('My Cart',style: mTextStyle28(mColor: isLight?Colors.black:Colors.white),),
         ),
 
       body: SafeArea(child: BlocBuilder<CartViewBloc, CartViewState>(
@@ -61,7 +64,7 @@ class _CartPageState extends State<CartPage> {
                             Container(
                               height: 40,
                               decoration: BoxDecoration(
-                                color: UiHelper.secondaryColor,
+                                color: isLight?UiHelper.secondaryColor:Colors.white10,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: TextField(
@@ -73,12 +76,12 @@ class _CartPageState extends State<CartPage> {
                                       borderSide: BorderSide.none,
                                     ),
                                     hintStyle: mTextStyle14(
-                                      mColor: UiHelper.quaternaryColor,
+                                      mColor: isLight?UiHelper.quaternaryColor:Colors.white,
                                     ),
                                     suffixText: "Apply",
                                     suffixStyle: mTextStyle14(
                                         mFontWeight: FontWeight.bold,
-                                        mColor: UiHelper.primaryColor)),
+                                        mColor: isLight?UiHelper.primaryColor:Colors.white)),
                               ),
                             ),
 
@@ -91,10 +94,10 @@ class _CartPageState extends State<CartPage> {
                               children: [
                                 Text(
                                   "Subtotal",
-                                  style: mTextStyle16(mColor: UiHelper.quaternaryColor),
+                                  style: mTextStyle16(mColor: isLight?UiHelper.quaternaryColor:Colors.white),
                                 ),
                                 Text("\$245.00",
-                                    style: mTextStyle16(mFontWeight: FontWeight.bold)),
+                                    style: mTextStyle16(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white)),
                               ],
                             ),
                             SizedBox(
@@ -115,9 +118,9 @@ class _CartPageState extends State<CartPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text("Total",
-                                    style: mTextStyle14(mFontWeight: FontWeight.bold)),
+                                    style: mTextStyle14(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white)),
                                 Text("\$245.00",
-                                    style: mTextStyle16(mFontWeight: FontWeight.bold)),
+                                    style: mTextStyle16(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white)),
                               ],
                             ),
                             SizedBox(
@@ -143,6 +146,7 @@ class _CartPageState extends State<CartPage> {
                   child: SizedBox(
                     height: 160,
                     child: Card(
+                      color: isLight? UiHelper.secondaryColor:Colors.white10,
                       elevation:6,
                       margin: EdgeInsets.only(top: 15),
 
@@ -158,7 +162,7 @@ class _CartPageState extends State<CartPage> {
                                   height: 90,
 
                                   decoration: BoxDecoration(
-                                    color: UiHelper.secondaryColor,
+                                    color: isLight?UiHelper.secondaryColor:Colors.white12,
                                       borderRadius: BorderRadius.circular(12),
                                        ),
                                   child: Center(child: Image.network(eachData.image!,width: 60,height: 70,fit: BoxFit.fill,)),
@@ -174,7 +178,7 @@ class _CartPageState extends State<CartPage> {
                                     height: 20,
                                   ),
                                   ListTile(
-                                    title: Text(eachData.name!,style: mTextStyle18(mFontWeight: FontWeight.bold),),
+                                    title: Text(eachData.name!,style: mTextStyle18(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white),),
                                     trailing: InkWell(
                                         onTap: (){
                                         },
@@ -185,7 +189,7 @@ class _CartPageState extends State<CartPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                      Text("\u{20B9}${eachData.price!}",style: mTextStyle16(),),
+                                      Text("\u{20B9}${eachData.price!}",style: mTextStyle16(mColor: isLight?Colors.black:Colors.white),),
                                         Padding(
                                           padding: const EdgeInsets.only(right: 22),
                                           child: Container(
@@ -210,8 +214,8 @@ class _CartPageState extends State<CartPage> {
 
                                                         });
                                                       },
-                                                      child: Image.asset('assets/icons/remove.png',color: Colors.black,width: 20,height: 20,fit: BoxFit.fill,)),
-                                                  Text("${eachData.quantity}",style: mTextStyle16(mFontWeight: FontWeight.bold),),
+                                                      child: Image.asset('assets/icons/remove.png',color:  isLight?Colors.black:Colors.white,width: 20,height: 20,fit: BoxFit.fill,)),
+                                                  Text("${eachData.quantity}",style: mTextStyle16(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white),),
 
                                                   InkWell(
                                                       onTap: (){
@@ -220,7 +224,7 @@ class _CartPageState extends State<CartPage> {
 
                                                         });
                                                       },
-                                                      child: Image.asset('assets/icons/add.png',color: Colors.black,width: 20,height: 20,fit: BoxFit.fill,))
+                                                      child: Image.asset('assets/icons/add.png',color: isLight?Colors.black:Colors.white,width: 20,height: 20,fit: BoxFit.fill,))
                                                 ],
                                               ),
                                             ),

@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage> {
-  
+  bool isLight = false;
   @override
   void initState() {
      super.initState();
@@ -26,17 +26,19 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    isLight = Theme.of(context).brightness==Brightness.light;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+
+        backgroundColor: isLight ? Colors.white: Colors.black,
         leading:  Padding(
           padding: const EdgeInsets.only(left: 12),
           child: InkWell(
             onTap: (){},
             child: CircleAvatar(
                 radius: 25,
-                backgroundColor: UiHelper.secondaryColor,
-                child: Center(child: Icon(Icons.grid_view_rounded,color: Colors.black87,))),
+                backgroundColor: isLight ? UiHelper.secondaryColor: Colors.white10,
+                child: Center(child: Icon(Icons.grid_view_rounded,color: isLight?Colors.black87:Colors.white,))),
           ),
         ),
           actions: [
@@ -46,8 +48,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: (){},
                 child: CircleAvatar(
                     radius: 25,
-                    backgroundColor: UiHelper.secondaryColor,
-                    child: Center(child: Icon(Icons.notifications_none,size: 30,color: Colors.black87,))),
+                    backgroundColor: isLight ? UiHelper.secondaryColor: Colors.white10,
+                    child: Center(child: Icon(Icons.notifications_none,size: 30,color: isLight?Colors.black87:Colors.white,))),
               ),
             ),
 
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
             width: double.infinity,
             height: double.infinity,
-            color: Colors.white,
+            color: isLight?Colors.white:Colors.black,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -69,18 +71,18 @@ class _HomePageState extends State<HomePage> {
                     child: TextField(
                       decoration: InputDecoration(
                           filled: true,
-                          fillColor: UiHelper.secondaryColor,
+                          fillColor:  isLight? UiHelper.secondaryColor : Colors.white12,
                           prefixIcon: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             child: Icon(
                               Icons.search,
-                              color: Colors.black54,
+                              color: isLight?Colors.black54: Colors.white,
                             ),
                           ),
                           hintText: "Search...",
                           hintStyle: mTextStyle14(
                               mFontWeight: FontWeight.bold,
-                              mColor: Colors.black54
+                              mColor: isLight?Colors.black54: Colors.white
                           ),
                           suffixIcon: SizedBox(
                             width: 60,
@@ -89,13 +91,13 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   width: 2,
                                   height: 30,
-                                  color: Colors.black54,
+                                  color: isLight?Colors.black54: Colors.white,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 15.0),
                                   child: Icon(
                                     Icons.filter_list,
-                                    color: Colors.black,
+                                    color: isLight?Colors.black54: Colors.white,
                                   ),
                                 ),
                               ],
@@ -206,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      Text(eacCat.name!,style: mTextStyle14(mFontWeight: FontWeight.bold,mColor: UiHelper.tertiaryColor),)
+                                      Text(eacCat.name!,style: mTextStyle14(mFontWeight: FontWeight.bold,mColor: isLight?UiHelper.tertiaryColor: Colors.white),)
                                     ],
                                   ),
                                 ),
@@ -224,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Special For You',style: mTextStyle18(mFontWeight: FontWeight.bold),),
+                        Text('Special For You',style: mTextStyle18(mFontWeight: FontWeight.bold,mColor:  isLight? Colors.black:Colors.white),),
                         Text('See all',style: mTextStyle14(mFontWeight: FontWeight.bold,mColor: Colors.grey),),
                       ],),
                   ),
@@ -260,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 210,
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(20),
-                                          color: UiHelper.secondaryColor
+                                          color: isLight?UiHelper.secondaryColor:Colors.white12
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 10,),
@@ -278,12 +280,12 @@ class _HomePageState extends State<HomePage> {
                                             SizedBox(
                                               height: 8,
                                             ),
-                                            Text(state.mProducts[index].name!,style: mTextStyle14(mFontWeight: FontWeight.bold),),
+                                            Text(state.mProducts[index].name!,style: mTextStyle14(mFontWeight: FontWeight.bold,mColor: isLight? Colors.black:Colors.white),),
                                             SizedBox(height: 5,),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Text("\u{20B9}${state.mProducts[index].price!}",style: mTextStyle16(mFontWeight: FontWeight.bold),),
+                                                Text("\u{20B9}${state.mProducts[index].price!}",style: mTextStyle16(mFontWeight: FontWeight.bold,mColor: isLight? Colors.black:Colors.white),),
                                                 SizedBox(
                                                   width: 10,
                                                 ),
@@ -317,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                                                     child: CircleAvatar(
                                                       radius: 8,
                                                       backgroundColor: Colors.white,
-                                                      child: Center(child: Text("+1",style: TextStyle(fontSize: 10),)),
+                                                      child: Center(child: Text("+1",style: TextStyle(fontSize: 10,color: Colors.black),)),
                                                     ),
                                                   ),
                                                 ),

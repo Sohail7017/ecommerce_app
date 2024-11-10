@@ -35,16 +35,18 @@ class _ExploreProductState extends State<ExploreProduct> {
   int index = 0;
   int quantity = 1;
   bool isLoading = false;
+  bool isLight = false;
 
 
 
   @override
   Widget build(BuildContext context) {
+    isLight = Theme.of(context).brightness==Brightness.light;
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: UiHelper.secondaryColor,
+        color: isLight?UiHelper.secondaryColor:Colors.black,
         child: Stack(
           children: [
             Padding(
@@ -61,9 +63,9 @@ class _ExploreProductState extends State<ExploreProduct> {
                           Navigator.pop(context);
                         },
                         child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.white,
-                          child: Center(child: Icon(Icons.arrow_back_ios,color: UiHelper.tertiaryColor,)),
+                          radius: 18,
+                          backgroundColor: isLight?Colors.white:Colors.white24,
+                          child: Center(child: Icon(Icons.arrow_back_ios,color: isLight?UiHelper.tertiaryColor:Colors.white,)),
                         ),
                       ),
                       Expanded(
@@ -72,17 +74,17 @@ class _ExploreProductState extends State<ExploreProduct> {
                         ),
                       ),
                       CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white,
-                        child: Center(child: Icon(Icons.share,color: UiHelper.tertiaryColor,)),
+                        radius: 18,
+                        backgroundColor: isLight?Colors.white:Colors.white24,
+                        child: Center(child: Icon(Icons.share,color: isLight?UiHelper.tertiaryColor:Colors.white,)),
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       CircleAvatar(
                         radius: 20,
-                        backgroundColor: Colors.white,
-                        child: Center(child: Image.asset('assets/icons/like.png',color: Colors.black54,height: 25,width: 25,)),
+                        backgroundColor: isLight?Colors.white:Colors.white24,
+                        child: Center(child: Image.asset('assets/icons/like.png',color: isLight?UiHelper.tertiaryColor:Colors.white,height: 25,width: 25,)),
                       ),
                     ],
                   ),
@@ -106,7 +108,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: isLight?Colors.white:Colors.white12,
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40))
                   ),
                   child: Padding(
@@ -119,17 +121,17 @@ class _ExploreProductState extends State<ExploreProduct> {
                         ),
                         Text(
                           widget.mProducts.name!,
-                          style: mTextStyle25(mFontWeight: FontWeight.bold),
+                          style: mTextStyle25(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white),
                         ),
                         Text(
                           "\u{20B9}${widget.mProducts.price}",
-                          style: mTextStyle22(mFontWeight: FontWeight.bold),
+                          style: mTextStyle22(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 200,),
                           child: Text(
                             "Seller: Tariqul isalm",
-                            style: mTextStyle18(mFontWeight: FontWeight.bold),
+                            style: mTextStyle18(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white),
                           ),
                         ),
                         Row(
@@ -165,7 +167,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                             ),
                             Text(
                               "(320 Review)",
-                              style: mTextStyle14(mColor: Colors.black54,mFontWeight: FontWeight.bold  ),
+                              style: mTextStyle14(mColor: isLight?Colors.black:Colors.white,mFontWeight: FontWeight.bold  ),
                             )
                           ],
                         ),
@@ -180,7 +182,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                                   padding: const EdgeInsets.only(right: 15),
                                   child: CircleAvatar(
                                     radius: 18,
-                                    backgroundColor: UiHelper.quaternaryColor.withOpacity(0.3),
+                                    backgroundColor: isLight?UiHelper.quaternaryColor.withOpacity(0.3):Colors.white54,
                                     child: CircleAvatar(
                                       radius: 15,
                                       backgroundColor: colorList[index],
@@ -217,7 +219,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                                     ),
                                     child: Center(
                                         child: Text(
-                                            "Description",style: isTap1 ? mTextStyle14(mColor: Colors.white,mFontWeight: FontWeight.bold) :mTextStyle14(mFontWeight: FontWeight.bold))))),
+                                            "Description",style: isTap1 ? mTextStyle14(mColor: Colors.white,mFontWeight: FontWeight.bold) :mTextStyle14(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white))))),
                             InkWell(
                                 onTap: () {
                                   isTap2 = true;
@@ -239,7 +241,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                                             .circular(20)),
                                     child: Center(
                                         child: Text(
-                                            "Specifications",style: isTap2 ? mTextStyle14(mColor: Colors.white,mFontWeight: FontWeight.bold) :mTextStyle14(mFontWeight: FontWeight.bold) ,)))),
+                                            "Specifications",style: isTap2 ? mTextStyle14(mColor: Colors.white,mFontWeight: FontWeight.bold) :mTextStyle14(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white) ,)))),
                             InkWell(
                                 onTap: () {
                                   isTap3 = true;
@@ -261,7 +263,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                                             .circular(20)),
                                     child: Center(
                                         child:
-                                        Text("Reviews",style: isTap3 ? mTextStyle14(mColor: Colors.white,mFontWeight: FontWeight.bold) :mTextStyle14(mFontWeight: FontWeight.bold))))),
+                                        Text("Reviews",style: isTap3 ? mTextStyle14(mColor: Colors.white,mFontWeight: FontWeight.bold) :mTextStyle14(mFontWeight: FontWeight.bold,mColor: isLight?Colors.black:Colors.white))))),
                           ],
                         ),
                         SizedBox(
@@ -269,7 +271,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                         ),
                         Text(
                           decText[index],
-                          style: mTextStyle14(mColor: Colors.black54,mFontWeight: FontWeight.bold),textAlign: TextAlign.left,
+                          style: mTextStyle14(mColor: isLight?Colors.black54:Colors.white,mFontWeight: FontWeight.bold),textAlign: TextAlign.left,
                         ),
 
                       ],
@@ -285,7 +287,7 @@ class _ExploreProductState extends State<ExploreProduct> {
                 height: 70,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Color(0xff202020),
+                  color: isLight?Color(0xff202020):Colors.white12,
                 ),
                 child: Center(
                   child: Row(

@@ -23,21 +23,23 @@ class _LoginPageState extends State<LoginPage> {
 
   bool? isCheck = false;
   bool isLoading = false;
+  bool isLight = false;
 
   @override
   Widget build(BuildContext context) {
+    isLight = Theme.of(context).brightness==Brightness.light;
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: UiHelper.secondaryColor,
+        color: isLight?UiHelper.secondaryColor:Colors.black,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
             Center(child: Image.asset('assets/icons/app_logo.png',width: 150,height: 130,)),
             Center(child: Text('Shop Now',style: mTextStyle16(mFontWeight: FontWeight.bold,mColor: UiHelper.primaryColor)),),
-            Text('Please enter your details to Log In.',style: mTextStyle14()),
+            Text('Please enter your details to Log In.',style: mTextStyle14(mColor: isLight?Colors.black:Colors.white)),
 
             CustomTextField.mTextField(
                 mController: mailController,
@@ -64,11 +66,11 @@ class _LoginPageState extends State<LoginPage> {
                         isCheck = newBool;
                       });
                     },),
-                  Text('Remember Me ',style: mTextStyle14(),),
+                  Text('Remember Me ',style: mTextStyle14(mColor: isLight?Colors.black:Colors.white),),
                   SizedBox(
                     width: 60,
                   ),
-                  Text('Forget Password?',style: mTextStyle16())
+                  Text('Forget Password?',style: mTextStyle16(mColor: isLight?Colors.black:Colors.white))
 
 
                 ],
@@ -128,12 +130,12 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Don't have a Account? ",style: mTextStyle16(),),
+                Text("Don't have a Account? ",style: mTextStyle16(mColor: isLight?Colors.black:Colors.white),),
                 InkWell(
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
                     },
-                    child: Text('Sign Up',style: mTextStyle16(mFontWeight: FontWeight.w600),)),
+                    child: Text('Sign Up',style: mTextStyle16(mFontWeight: FontWeight.w600,mColor: isLight?Colors.black:Colors.white),)),
               ],
             )
           ],

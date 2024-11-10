@@ -14,6 +14,7 @@ class SplashScreen extends StatefulWidget{
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool isLight =false;
 
   @override
   void initState() {
@@ -42,16 +43,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    isLight =  Theme.of(context).brightness == Brightness.light;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: UiHelper.secondaryColor,
+        color: isLight?UiHelper.secondaryColor:Colors.black,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/icons/app_logo.png',width: 150,height: 125,fit: BoxFit.fill,),
-            Text('SHOP NOW',style: mTextStyle18(mFontWeight: FontWeight.bold,mColor: UiHelper.primaryColor),)
+            Text('SHOP NOW',style: mTextStyle18(mFontWeight: FontWeight.bold,mColor: isLight?UiHelper.primaryColor:Colors.white),)
           ],
         ),
       ),

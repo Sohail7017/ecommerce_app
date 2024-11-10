@@ -23,17 +23,20 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passController = TextEditingController();
 
   bool isLoading = false;
+  bool isLight = false;
 
 
 
   @override
   Widget build(BuildContext context) {
+    isLight =  Theme.of(context).brightness == Brightness.light;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: UiHelper.secondaryColor,
+        color:  isLight?UiHelper.secondaryColor:Colors.black,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -47,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
             ),
             SizedBox(height: 15,),
-            Center(child: Text("Now let's make you a Shop Now member",style: mTextStyle16(),)),
+            Center(child: Text("Now let's make you a Shop Now member",style: mTextStyle16(mColor: isLight?Colors.black:Colors.white),)),
 
 
             CustomTextField.mTextField(
@@ -140,7 +143,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 onTap: (){
               Navigator.pop(context);
                 },
-                child: Text('Already have a account',style: mTextStyle16(mFontWeight: FontWeight.w600),))
+                child: Text('Already have a account',style: mTextStyle16(mFontWeight: FontWeight.w600,mColor: isLight?Colors.black:Colors.white),))
           ],
         ),
       ),
