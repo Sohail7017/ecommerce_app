@@ -1,10 +1,15 @@
-import 'package:ecommerce_app_clone/screens/dashboard.dart';
-import 'package:ecommerce_app_clone/screens/home_page.dart';
-import 'package:ecommerce_app_clone/screens/sign_up_page.dart';
-import 'package:flutter/material.dart';
+import 'package:ecommerce_app_clone/main.dart';
+import 'package:ecommerce_app_clone/screens/auth/login/bloc/login_bloc.dart';
+import 'package:ecommerce_app_clone/screens/auth/login/bloc/login_event.dart';
+import 'package:ecommerce_app_clone/screens/auth/login/bloc/login_states.dart';
+import 'package:ecommerce_app_clone/screens/dashboard/dashboard.dart';
 
-import '../app_utils/custom_text_field.dart';
-import '../app_utils/ui_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../app_utils/custom_text_field.dart';
+import '../../../app_utils/ui_helper.dart';
+import '../register/sign_up_page.dart';
 
 class LoginPage extends StatefulWidget{
   @override
@@ -17,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   var passController = TextEditingController();
 
   bool? isCheck = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,20 +76,52 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             SizedBox(height: 20,),
-            Padding(
+            BlocListener<LoginBloc, LoginStates>(
+           listener: (context, state) {
+                if(state is LoadingLoginState){
+                  isLoading = true;
+                  setState(() {
+
+                  });
+                }else if(state is FailureLoginState){
+                  isLoading = false;
+                  setState(() {
+
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${state.errMsg}")));
+                }else if(state is SuccessLoginState){
+                  isLoading = false;
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
+                }
+              },
+              child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
                 height: 45,
                 child: ElevatedButton(onPressed: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
-                }, child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Log In',style: mTextStyle25(mColor: Colors.white,mFontWeight: FontWeight.bold),),
-                  ],
-                ),style: ElevatedButton.styleFrom(backgroundColor: UiHelper.primaryColor),),
+                      var mail = mailController.text;
+                      var pass = passController.text;
+                      if(mail.isNotEmpty && pass.isNotEmpty){
+
+                        context.read<LoginBloc>().add(UserAuthenticateEvent(
+                            eMail: mail,
+                            pass: pass));
+
+
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Fill all required Fields")));
+                      }
+                       },
+                  child: Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   isLoading ? CircularProgressIndicator() : Text('Log In',style: mTextStyle25(mColor: Colors.white,mFontWeight: FontWeight.bold),),
+
+                 ],
+                                ),style: ElevatedButton.styleFrom(backgroundColor: UiHelper.primaryColor),),
               ),
             ),
+),
             SizedBox(
               height: 20,
             ),

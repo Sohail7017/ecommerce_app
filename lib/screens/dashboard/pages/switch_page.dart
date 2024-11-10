@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../app_utils/ui_helper.dart';
+import '../../../app_utils/ui_helper.dart';
 
 class SwitchPage extends StatelessWidget {
   const SwitchPage({super.key});

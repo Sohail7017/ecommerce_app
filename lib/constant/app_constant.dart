@@ -1,7 +1,9 @@
-import 'dart:ui';
+
 
 class AppConstant{
   
+
+static final String PREF_TOKEN_KEY = "tokan";
 
 
   static const List<Map<String,dynamic>> saleList = [

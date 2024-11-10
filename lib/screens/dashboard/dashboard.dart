@@ -1,9 +1,9 @@
 import 'package:ecommerce_app_clone/app_utils/ui_helper.dart';
-import 'package:ecommerce_app_clone/screens/cart_page.dart';
-import 'package:ecommerce_app_clone/screens/favourite_page.dart';
-import 'package:ecommerce_app_clone/screens/home_page.dart';
-import 'package:ecommerce_app_clone/screens/switch_page.dart';
-import 'package:ecommerce_app_clone/screens/user_page.dart';
+import 'package:ecommerce_app_clone/screens/dashboard/pages/view_cart/cart_page.dart';
+import 'package:ecommerce_app_clone/screens/dashboard/pages/favourite_page.dart';
+import 'package:ecommerce_app_clone/screens/dashboard/pages/home_page.dart';
+import 'package:ecommerce_app_clone/screens/dashboard/pages/switch_page.dart';
+import 'package:ecommerce_app_clone/screens/dashboard/pages/user/user_page.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {

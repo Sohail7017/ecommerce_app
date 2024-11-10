@@ -19,11 +19,14 @@ class CustomTextField{
       padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
       child: TextField(
         controller: mController,
+
+
         decoration: InputDecoration(
           prefixIcon: Icon(prefIcon),
           labelText: mText,
           prefixText: preText,
           suffixText: sufText,
+
           suffixIcon: Icon(suffixIcon),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(11),

@@ -1,17 +1,35 @@
 import 'package:ecommerce_app_clone/app_utils/custom_text_field.dart';
 import 'package:ecommerce_app_clone/app_utils/ui_helper.dart';
-import 'package:ecommerce_app_clone/screens/login_page.dart';
+
+import 'package:ecommerce_app_clone/screens/auth/register/bloc/register_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget{
-  var nameController = TextEditingController();
-  var mobController = TextEditingController();
-  var mailController = TextEditingController();
-  var passController = TextEditingController();
+
+
+class SignUpPage extends StatefulWidget{
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nameController = TextEditingController();
+
+  TextEditingController mobController = TextEditingController();
+
+  TextEditingController mailController = TextEditingController();
+
+  TextEditingController passController = TextEditingController();
+
+  bool isLoading = false;
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -51,6 +69,7 @@ class SignUpPage extends StatelessWidget{
 
             CustomTextField.mTextField(
               mController: passController,
+
               mText: 'Password',
             suffixIcon: Icons.remove_red_eye_outlined,
               prefIcon: Icons.password
@@ -60,12 +79,58 @@ class SignUpPage extends StatelessWidget{
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
                 height: 45,
-                child: ElevatedButton(onPressed: (){}, child: Row(
+                child: BlocListener<RegisterBloc, RegisterState>(
+                listener: (context, state) {
+                  if(state is RegisterLoadingState){
+                    isLoading = true;
+                    setState(() {
+
+                    });
+                  }else if(state is RegisterFailureState){
+                    isLoading = false;
+                    setState(() {
+
+                    });
+                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${state.errorMsg}")));
+                  }else if(state is RegisterSuccessState){
+                    isLoading = false;
+                    Navigator.pop(context);
+                  }
+                 },
+                 child: ElevatedButton(onPressed: (){
+                  var name = nameController.text;
+                  var mobNo = mobController.text;
+                  var mail = mailController.text;
+                  var password = passController.text;
+
+                  if(name.isNotEmpty && mobNo.isNotEmpty && mail.isNotEmpty && password.isNotEmpty){
+
+                    context.read<RegisterBloc>().add(RegisterUserEvent(bodyParams: {
+                      "name":name,
+                      "mobile_number":mobNo,
+                      "email":mail,
+                      "password":password
+
+
+                    }));
+
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Fill  required fields')));
+                  }
+
+
+                    
+
+
+                }, child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+
+                    isLoading ? CircularProgressIndicator(color: Colors.white,) :
                     Text('Sign Up',style: mTextStyle25(mColor: Colors.white,mFontWeight: FontWeight.bold),),
                   ],
                 ),style: ElevatedButton.styleFrom(backgroundColor: UiHelper.primaryColor),),
+),
               ),
             ),
             SizedBox(
@@ -73,7 +138,7 @@ class SignUpPage extends StatelessWidget{
             ),
             InkWell(
                 onTap: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.pop(context);
                 },
                 child: Text('Already have a account',style: mTextStyle16(mFontWeight: FontWeight.w600),))
           ],
